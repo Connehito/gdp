@@ -27,7 +27,7 @@ const (
 	CommandPublish = "publish"
 )
 
-// Run invokes depoloy and publish's proccess.
+// Run invokes depoloy and publish's process.
 func (cli *CLI) Run(args []string) int {
 	var version bool
 	var dryRun bool
