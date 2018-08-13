@@ -12,6 +12,14 @@ gdp is a CLI tool for pushing the tag associated with deployment and publishing 
 - [hub command](https://github.com/github/hub#installation)
 
 ## Installation
+
+### Homebrew
+```bash
+$ brew tap Connehito/gdp
+$ brew install gdp
+```
+
+### go get
 ```bash
 $ go get -u github.com/Connehito/gdp
 ```
