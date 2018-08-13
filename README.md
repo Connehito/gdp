@@ -62,11 +62,14 @@ $ gdp publish
 
 ### How to create generate note
 Release note content is generated based on merge commit messages.
+
 So, depending on your branch strategy, it may not be the intended result.
 
 ### What is last printed message?
 When gdp succeeds, the following message is printed.
+
 `Do not be satisfied with 'released', let's face user's feedback in sincerity!`
+
 This is the watchword of [Connehito's developers](https://connehito.com/).
 
 ## Contributing
