@@ -11,9 +11,38 @@ $ go get -u github.com/Connehito/gdp
 ```
 
 ## Usage
+
+### deploy
+- Add the tag to local repository and push the tag to remote(origin) repository.
+
 ```
-$ gdp deploy|publish [options]
+# specify tag
+$ gdp deploy -t TAG
+
+# dry-run
+$ gdp deploy -t TAG -dry-run
+
+# set tag automatically
+$ gdp deploy
 ```
+
+### publish
+- Create the release note in GitHub which based on the merge commits of the tag.
+
+```
+# specify tag
+$ gdp publish -t TAG
+
+# dry-run
+$ gdp publish -t TAG -dry-run
+
+# set tag automatically
+$ gdp publish
+```
+
+### supported tag's format
+- [semantic version](https://semver.org/): e.g. v1.2.3 or 1.2.3
+- date version: e.g. 20180525.1
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/Connehito/gdp.
