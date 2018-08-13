@@ -13,20 +13,20 @@ gdp is a CLI tool for pushing the tag associated with deployment and publishing 
 
 ## Installation
 
-### Homebrew
+### Via Homebrew
 ```bash
 $ brew tap Connehito/gdp
 $ brew install gdp
 ```
 
-### go get
+### Via go get
 ```bash
 $ go get -u github.com/Connehito/gdp
 ```
 
 ## Usage
 
-### deploy
+### Deploy
 Add the tag to local repository and push the tag to remote(origin) repository.
 
 ```bash
@@ -40,7 +40,7 @@ $ gdp deploy -t TAG -d
 $ gdp deploy
 ```
 
-### publish
+### Publish
 Create the release note in GitHub which based on the merge commits of the tag.
 
 ```bash
@@ -54,9 +54,20 @@ $ gdp publish -t TAG -d
 $ gdp publish
 ```
 
-### supported tag's format
+## Specification
+
+### Supported tag's format
 - [semantic version](https://semver.org/): e.g. v1.2.3 or 1.2.3
 - date version: e.g. 20180525.1
+
+### How to create generate note
+Release note content is generated based on merge commit messages.
+So, depending on your branch strategy, it may not be the intended result.
+
+### What is last printed message?
+When gdp succeeds, the following message is printed.
+`Do not be satisfied with 'released', let's face user's feedback in sincerity!`
+This is the watchword of [Connehito's developers](https://connehito.com/).
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/Connehito/gdp.
