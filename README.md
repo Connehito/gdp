@@ -12,35 +12,35 @@ gdp is a CLI tool for pushing the tag associated with deployment and publishing 
 - [hub command](https://github.com/github/hub#installation)
 
 ## Installation
-```
+```bash
 $ go get -u github.com/Connehito/gdp
 ```
 
 ## Usage
 
 ### deploy
-- Add the tag to local repository and push the tag to remote(origin) repository.
+Add the tag to local repository and push the tag to remote(origin) repository.
 
-```
+```bash
 # specify tag
 $ gdp deploy -t TAG
 
 # dry-run
-$ gdp deploy -t TAG -dry-run
+$ gdp deploy -t TAG -d
 
 # set tag automatically
 $ gdp deploy
 ```
 
 ### publish
-- Create the release note in GitHub which based on the merge commits of the tag.
+Create the release note in GitHub which based on the merge commits of the tag.
 
-```
+```bash
 # specify tag
 $ gdp publish -t TAG
 
 # dry-run
-$ gdp publish -t TAG -dry-run
+$ gdp publish -t TAG -d
 
 # set tag automatically
 $ gdp publish
