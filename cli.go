@@ -97,22 +97,8 @@ func (cli *CLI) Run(args []string) int {
 	}
 
 	// validation
-	if !force {
-		if subCommand == CommandDeploy {
-			if !cli.gdp.IsMasterBranch() {
-				printError(cli.errStream, fmt.Sprintf("Branch is not master."))
-				return ExitError
-			}
-			if cli.gdp.IsExistTagInLocal(tag) {
-				printError(cli.errStream, fmt.Sprintf("Tag is already exist in local."))
-				return ExitError
-			}
-		} else {
-			if !cli.gdp.IsExistTagInRemote(tag) {
-				printError(cli.errStream, fmt.Sprintf("Tag is not exist in remote."))
-				return ExitError
-			}
-		}
+	if !force && !validate(cli, subCommand, tag) {
+		return ExitError
 	}
 
 	toTag := "HEAD"
@@ -166,4 +152,24 @@ func printSuccess(w io.Writer, message string, args ...interface{}) {
 func printError(w io.Writer, message string, args ...interface{}) {
 	message = fmt.Sprintf("[red]%s[reset]", message)
 	fmt.Fprintln(w, colorstring.Color(fmt.Sprintf(message, args...)))
+}
+
+func validate(cli *CLI, subCommand string, tag string) bool {
+	if subCommand == CommandDeploy {
+		if !cli.gdp.IsMasterBranch() {
+			printError(cli.errStream, fmt.Sprintf("Branch is not master."))
+			return false
+		}
+		if cli.gdp.IsExistTagInLocal(tag) {
+			printError(cli.errStream, fmt.Sprintf("Tag is already exist in local."))
+			return false
+		}
+	} else {
+		if !cli.gdp.IsExistTagInRemote(tag) {
+			printError(cli.errStream, fmt.Sprintf("Tag is not exist in remote."))
+			return false
+		}
+	}
+
+	return true
 }
