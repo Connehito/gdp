@@ -44,8 +44,8 @@ func (cli *CLI) Run(args []string) int {
 	flags.BoolVar(&version, "v", false, "")
 	flags.BoolVar(&dryRun, "dry-run", false, "")
 	flags.BoolVar(&dryRun, "d", false, "")
-	flags.BoolVar(&dryRun, "force", false, "")
-	flags.BoolVar(&dryRun, "f", false, "")
+	flags.BoolVar(&force, "force", false, "")
+	flags.BoolVar(&force, "f", false, "")
 	flags.StringVar(&tag, "tag", "", "")
 	flags.StringVar(&tag, "t", "", "")
 
