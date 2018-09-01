@@ -237,6 +237,40 @@ func TestRun_DeployNoSpecifiedTag(t *testing.T) {
 	}
 }
 
+type FakeGdpDeployForce struct {
+	Gdp
+}
+
+func (f *FakeGdpDeployForce) GetMergeCommitList(toTag string) (string, error) {
+	list := "- itosho: initial commit\n"
+	list = list + "- itosho: fix bug"
+	return list, nil
+}
+
+func (f *FakeGdpDeployForce) Deploy(tag string) error {
+	return nil
+}
+
+func TestRun_DeployForce(t *testing.T) {
+	out, err := new(bytes.Buffer), new(bytes.Buffer)
+	cli := &CLI{
+		outStream: out,
+		errStream: err,
+		gdp:       &FakeGdpDeployForce{},
+	}
+
+	args := strings.Split("gdp deploy -t v1.2.4 -f", " ")
+	code := cli.Run(args)
+	if code != ExitSuccess {
+		t.Errorf("ExitCode=%d, Expected=%d", code, ExitError)
+	}
+
+	expected := "gdp deploy done."
+	if !strings.Contains(out.String(), expected) {
+		t.Errorf("Output=%q, Expected=%q", out.String(), expected)
+	}
+}
+
 type FakeGdpDeployNotMasterBranch struct {
 	Gdp
 }
@@ -489,6 +523,40 @@ func TestRun_PublishNoSpecifiedTag(t *testing.T) {
 	}
 
 	expected := "v1.2.3"
+	if !strings.Contains(out.String(), expected) {
+		t.Errorf("Output=%q, Expected=%q", out.String(), expected)
+	}
+}
+
+type FakeGdpPublishForce struct {
+	Gdp
+}
+
+func (f *FakeGdpPublishForce) GetMergeCommitList(toTag string) (string, error) {
+	list := "- itosho: initial commit\n"
+	list = list + "- itosho: fix bug"
+	return list, nil
+}
+
+func (f *FakeGdpPublishForce) Publish(tag string, commits string) error {
+	return nil
+}
+
+func TestRun_PublishForce(t *testing.T) {
+	out, err := new(bytes.Buffer), new(bytes.Buffer)
+	cli := &CLI{
+		outStream: out,
+		errStream: err,
+		gdp:       &FakeGdpPublishForce{},
+	}
+
+	args := strings.Split("gdp publish -t v1.2.3 -f", " ")
+	code := cli.Run(args)
+	if code != ExitSuccess {
+		t.Errorf("ExitCode=%d, Expected=%d", code, ExitError)
+	}
+
+	expected := "gdp publish done."
 	if !strings.Contains(out.String(), expected) {
 		t.Errorf("Output=%q, Expected=%q", out.String(), expected)
 	}

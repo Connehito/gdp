@@ -36,6 +36,9 @@ $ gdp deploy -t TAG
 # dry-run
 $ gdp deploy -t TAG -d
 
+# force(skipped validation)
+$ gdp deploy -t TAG -f
+
 # set tag automatically
 $ gdp deploy
 ```
