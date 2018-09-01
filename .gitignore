@@ -13,3 +13,6 @@
 
 # dep
 vendor/
+
+# bin
+bin/
