@@ -11,4 +11,5 @@ action "Filters for GitHub Actions" {
 action "Auto Assign" {
   uses = "kentaro-m/auto-assign@master"
   needs = ["Filters for GitHub Actions"]
+  secrets = ["GITHUB_TOKEN"]
 }
