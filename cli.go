@@ -1,11 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
-	"io"
-
 	"github.com/mitchellh/colorstring"
+	"io"
+	"os"
 )
 
 // CLI has stdout/stderr's writer and Gdp's interface.
@@ -25,6 +26,12 @@ const (
 const (
 	CommandDeploy  = "deploy"
 	CommandPublish = "publish"
+)
+
+// Safety Hour.
+const (
+	SafetyHourStart  = 9
+	SafetyHourEnd = 19
 )
 
 // Run invokes depoloy and publish's process.
@@ -126,6 +133,14 @@ func (cli *CLI) Run(args []string) int {
 
 	// execution
 	if subCommand == CommandDeploy {
+		if !isSafetyHour() {
+			fmt.Fprintln(cli.outStream, "It's past the regular time. Is this a hot-fix release?")
+			fmt.Fprint(cli.outStream, "> ")
+			if !yesOrNo(cli) {
+				return ExitError
+			}
+		}
+
 		if err := cli.gdp.Deploy(tag); err != nil {
 			printError(cli.errStream, fmt.Sprintf("Deploy execution error: %s.", err.Error()))
 			return ExitError
@@ -172,4 +187,32 @@ func validate(cli *CLI, subCommand string, tag string) bool {
 	}
 
 	return true
+}
+
+func isSafetyHour() bool {
+	t := Now()
+	if t.Hour() > SafetyHourStart && t.Hour() < SafetyHourEnd {
+		return  true
+	}
+
+	return false
+}
+
+func yesOrNo(cli *CLI) bool {
+	reader := bufio.NewReader(os.Stdin)
+	s, err := reader.ReadByte()
+	if err != nil {
+		return false
+	}
+
+	if s == []byte("Y")[0] || s == []byte("y")[0] {
+		fmt.Fprintln(cli.outStream, "OK. Take time.")
+		return true
+	} else if s == []byte("N")[0] || s == []byte("n")[0] {
+		printError(cli.errStream, fmt.Sprintf("Good choice."))
+		return false
+	}
+
+	printError(cli.errStream, fmt.Sprintf("Please enter y or n."))
+	return false
 }

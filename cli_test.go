@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strings"
 	"testing"
+	"time"
 )
 
 // Tests for flag
@@ -183,6 +184,7 @@ func TestRun_Deploy(t *testing.T) {
 		errStream: err,
 		gdp:       &FakeGdpDeploy{},
 	}
+	Set(time.Date(2020, 4, 1, 17, 00, 00, 0, time.Local))
 
 	args := strings.Split("gdp deploy -t v1.2.4", " ")
 	code := cli.Run(args)
@@ -223,6 +225,7 @@ func TestRun_DeployNoSpecifiedTag(t *testing.T) {
 		errStream: err,
 		gdp:       &FakeGdpDeploy{},
 	}
+	Set(time.Date(2020, 4, 1, 17, 00, 00, 0, time.Local))
 
 	args := strings.Split("gdp deploy", " ")
 
@@ -258,6 +261,7 @@ func TestRun_DeployForce(t *testing.T) {
 		errStream: err,
 		gdp:       &FakeGdpDeployForce{},
 	}
+	Set(time.Date(2020, 4, 1, 17, 00, 00, 0, time.Local))
 
 	args := strings.Split("gdp deploy -t v1.2.4 -f", " ")
 	code := cli.Run(args)
@@ -432,6 +436,7 @@ func TestRun_DeployErrorInDeploy(t *testing.T) {
 		errStream: err,
 		gdp:       &FakeGdpDeployErrorInDeploy{},
 	}
+	Set(time.Date(2020, 4, 1, 17, 00, 00, 0, time.Local))
 
 	args := strings.Split("gdp deploy -t v1.2.4", " ")
 	code := cli.Run(args)
