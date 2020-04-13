@@ -4,11 +4,9 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"github.com/mitchellh/colorstring"
 	"io"
 	"os"
-	"time"
-
-	"github.com/mitchellh/colorstring"
 )
 
 // CLI has stdout/stderr's writer and Gdp's interface.
@@ -192,7 +190,7 @@ func validate(cli *CLI, subCommand string, tag string) bool {
 }
 
 func isSafetyHour() bool {
-	t := time.Now()
+	t := Now()
 	if t.Hour() > SafetyHourStart && t.Hour() < SafetyHourEnd {
 		return  true
 	}
