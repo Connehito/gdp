@@ -6,7 +6,8 @@ ARCH=amd64
 
 all: setup mod test build
 setup:
-	cd ./tools; go mod download
+	go get golang.org/x/lint/golint
+	go get golang.org/x/tools/cmd/goimports
 mod:
 	go mod download
 test:
