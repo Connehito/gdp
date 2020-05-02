@@ -24,6 +24,11 @@ $ brew install gdp
 $ go get -u github.com/Connehito/gdp
 ```
 
+Add $GOPATH/bin to the PATH environment variable.
+```bash
+export PATH=$PATH:$GOPATH/bin
+```
+
 ## Usage
 
 ### Deploy
