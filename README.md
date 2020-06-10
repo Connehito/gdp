@@ -58,6 +58,9 @@ $ gdp publish -t TAG
 # dry-run
 $ gdp publish -t TAG -d
 
+# force(skipped validation)
+$ gdp publish -t TAG -f
+
 # set tag automatically
 $ gdp publish
 ```

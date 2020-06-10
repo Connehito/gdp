@@ -34,7 +34,7 @@ const (
 	SafetyHourEnd = 19
 )
 
-// Run invokes depoloy and publish's process.
+// Run invokes deploy and publish's process.
 func (cli *CLI) Run(args []string) int {
 	var version bool
 	var dryRun bool
