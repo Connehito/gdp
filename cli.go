@@ -191,8 +191,8 @@ func validate(cli *CLI, subCommand string, tag string) bool {
 
 func isSafetyHour() bool {
 	t := Now()
-	if t.Hour() > SafetyHourStart && t.Hour() < SafetyHourEnd {
-		return  true
+	if t.Hour() >= SafetyHourStart && t.Hour() < SafetyHourEnd {
+		return true
 	}
 
 	return false
