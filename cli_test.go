@@ -632,3 +632,25 @@ func TestRun_PublishErrorInPublish(t *testing.T) {
 		t.Errorf("Output=%q, Expected=%q", out.String(), expected)
 	}
 }
+
+func TestIsSafetyHour(t *testing.T) {
+	type pattern struct {
+		exp  bool
+		time time.Time
+	}
+	patterns := []pattern{
+		{false, time.Date(2020, 1, 1, 8, 59, 59, 59, time.Local)},
+		{true, time.Date(2020, 1, 1, 9, 0, 0, 0, time.Local)},
+		{true, time.Date(2020, 1, 1, 18, 59, 59, 59, time.Local)},
+		{false, time.Date(2020, 1, 1, 19, 0, 0, 0, time.Local)},
+	}
+
+	for _, p := range patterns {
+		Set(p.time)
+
+		isSafety := IsSafetyHour()
+		if isSafety != p.exp {
+			t.Errorf("Output=%t, Expected=%t, Time=%v", isSafety, p.exp, p.time)
+		}
+	}
+}

@@ -30,8 +30,8 @@ const (
 
 // Safety Hour.
 const (
-	SafetyHourStart  = 9
-	SafetyHourEnd = 19
+	SafetyHourStart = 9
+	SafetyHourEnd   = 19
 )
 
 // Run invokes deploy and publish's process.
@@ -133,7 +133,7 @@ func (cli *CLI) Run(args []string) int {
 
 	// execution
 	if subCommand == CommandDeploy {
-		if !isSafetyHour() {
+		if !IsSafetyHour() {
 			fmt.Fprintln(cli.outStream, "It's past the regular time. Is this a hot-fix release?")
 			fmt.Fprint(cli.outStream, "> ")
 			if !yesOrNo(cli) {
@@ -189,7 +189,7 @@ func validate(cli *CLI, subCommand string, tag string) bool {
 	return true
 }
 
-func isSafetyHour() bool {
+func IsSafetyHour() bool {
 	t := Now()
 	if t.Hour() >= SafetyHourStart && t.Hour() < SafetyHourEnd {
 		return true
