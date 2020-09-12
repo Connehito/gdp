@@ -171,8 +171,8 @@ func printError(w io.Writer, message string, args ...interface{}) {
 
 func validate(cli *CLI, subCommand string, tag string) bool {
 	if subCommand == CommandDeploy {
-		if !cli.gdp.IsMasterBranch() {
-			printError(cli.errStream, fmt.Sprintf("Branch is not master."))
+		if !cli.gdp.IsMasterOrMainBranch() {
+			printError(cli.errStream, fmt.Sprintf("Branch is not master or main."))
 			return false
 		}
 		if cli.gdp.IsExistTagInLocal(tag) {

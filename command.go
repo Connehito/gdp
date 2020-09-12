@@ -10,7 +10,7 @@ import (
 
 // Gdp is the interface which has methods deploying and publising.
 type Gdp interface {
-	IsMasterBranch() bool
+	IsMasterOrMainBranch() bool
 	IsExistTagInLocal(tag string) bool
 	IsExistTagInRemote(tag string) bool
 	GetMergeCommitList(toTag string) (string, error)
@@ -39,15 +39,15 @@ func NewCommand() (Gdp, error) {
 	return &Command{}, nil
 }
 
-// IsMasterBranch checks current branch is master or not.
-func (c *Command) IsMasterBranch() bool {
+// IsMasterOrMainBranch checks current branch is master|main or not.
+func (c *Command) IsMasterOrMainBranch() bool {
 	out, err := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD").CombinedOutput()
 	if err != nil {
 		return false
 	}
 
 	branch := strings.TrimRight(string(out), "\n")
-	if branch != "master" {
+	if branch != "master" && branch != "main" {
 		return false
 	}
 

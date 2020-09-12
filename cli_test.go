@@ -155,7 +155,7 @@ type FakeGdpDeploy struct {
 	Gdp
 }
 
-func (f *FakeGdpDeploy) IsMasterBranch() bool {
+func (f *FakeGdpDeploy) IsMasterOrMainBranch() bool {
 	return true
 }
 
@@ -279,7 +279,7 @@ type FakeGdpDeployNotMasterBranch struct {
 	Gdp
 }
 
-func (f *FakeGdpDeployNotMasterBranch) IsMasterBranch() bool {
+func (f *FakeGdpDeployNotMasterBranch) IsMasterOrMainBranch() bool {
 	return false
 }
 
@@ -297,7 +297,7 @@ func TestRun_DeployNotMasterBranch(t *testing.T) {
 		t.Errorf("ExitCode=%d, Expected=%d", code, ExitError)
 	}
 
-	expected := "Branch is not master."
+	expected := "Branch is not master or main."
 	if !strings.Contains(err.String(), expected) {
 		t.Errorf("Output=%q, Expected=%q", err.String(), expected)
 	}
@@ -307,7 +307,7 @@ type FakeGdpDeployExistTagInLocal struct {
 	Gdp
 }
 
-func (f *FakeGdpDeployExistTagInLocal) IsMasterBranch() bool {
+func (f *FakeGdpDeployExistTagInLocal) IsMasterOrMainBranch() bool {
 	return true
 }
 
@@ -339,7 +339,7 @@ type FakeGdpDeployErrorInGetNextTag struct {
 	Gdp
 }
 
-func (f *FakeGdpDeployErrorInGetNextTag) IsMasterBranch() bool {
+func (f *FakeGdpDeployErrorInGetNextTag) IsMasterOrMainBranch() bool {
 	return true
 }
 
@@ -375,7 +375,7 @@ type FakeGdpDeployErrorInGetMergeCommitList struct {
 	Gdp
 }
 
-func (f *FakeGdpDeployErrorInGetMergeCommitList) IsMasterBranch() bool {
+func (f *FakeGdpDeployErrorInGetMergeCommitList) IsMasterOrMainBranch() bool {
 	return true
 }
 
@@ -411,7 +411,7 @@ type FakeGdpDeployErrorInDeploy struct {
 	Gdp
 }
 
-func (f *FakeGdpDeployErrorInDeploy) IsMasterBranch() bool {
+func (f *FakeGdpDeployErrorInDeploy) IsMasterOrMainBranch() bool {
 	return true
 }
 
