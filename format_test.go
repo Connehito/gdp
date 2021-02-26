@@ -53,6 +53,30 @@ func TestGetNextVersion_DatePlus(t *testing.T) {
 	}
 }
 
+func TestGetNextVersion_DateWithPrefix(t *testing.T) {
+	const prefix = "release_"
+	tag, _ := GetNextVersion(prefix + "20180525.1")
+
+	const layout = "20060102"
+	today := time.Now().Format(layout)
+	expected := prefix + today + ".1"
+	if tag != expected {
+		t.Errorf("Output=%q, Expected=%q", tag, expected)
+	}
+}
+
+func TestGetNextVersion_DatePlusWithPrefix(t *testing.T) {
+	const prefix = "release_"
+	const layout = "20060102"
+	today := time.Now().Format(layout)
+	tag, _ := GetNextVersion(prefix + today + ".1")
+
+	expected := prefix + today + ".2"
+	if tag != expected {
+		t.Errorf("Output=%q, Expected=%q", tag, expected)
+	}
+}
+
 func TestGetNextVersion_DateError(t *testing.T) {
 	const layout = "20060102"
 	today := time.Now().Format(layout)
