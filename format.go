@@ -1,6 +1,7 @@
 package main
 
 import (
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -30,16 +31,19 @@ func GetNextVersion(tag string) (string, error) {
 	const layout = "20060102"
 	today := time.Now().Format(layout)
 
-	if tags[0] == today {
-		minor, err := strconv.Atoi(tags[1])
-		if err != nil {
-			return "", err
+	dateRe := regexp.MustCompile(`(.*)(\d{8})(\.)(.+)`)
+	if match := dateRe.FindStringSubmatch(tag); match != nil {
+		if match[2] == today {
+			minor, err := strconv.Atoi(match[4])
+			if err != nil {
+				return "", err
+			}
+
+			next := strconv.Itoa(minor + 1)
+			return match[1] + today + "." + next, nil
 		}
-
-		next := strconv.Itoa(minor + 1)
-		return today + "." + next, nil
+		return match[1] + today + "." + "1", nil
 	}
-
 	return today + ".1", nil
 }
 
