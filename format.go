@@ -31,18 +31,18 @@ func GetNextVersion(tag string) (string, error) {
 	const layout = "20060102"
 	today := time.Now().Format(layout)
 
-	dateRe := regexp.MustCompile(`(.*)(\d{8})(\.)(.+)`)
-	if match := dateRe.FindStringSubmatch(tag); match != nil {
-		if match[2] == today {
-			minor, err := strconv.Atoi(match[4])
+	dateRe := regexp.MustCompile(`(.*)(\d{8})\.(.+)`)
+	if m := dateRe.FindStringSubmatch(tag); m != nil {
+		if m[2] == today {
+			minor, err := strconv.Atoi(m[3])
 			if err != nil {
 				return "", err
 			}
 
 			next := strconv.Itoa(minor + 1)
-			return match[1] + today + "." + next, nil
+			return m[1] + today + "." + next, nil
 		}
-		return match[1] + today + "." + "1", nil
+		return m[1] + today + "." + "1", nil
 	}
 	return today + ".1", nil
 }
