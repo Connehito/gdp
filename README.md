@@ -69,7 +69,7 @@ $ gdp publish
 
 ### Supported tag's format
 - [semantic version](https://semver.org/): e.g. v1.2.3 or 1.2.3
-- date version: e.g. 20180525.1
+- date version: e.g. 20180525.1 or release_20180525
 
 ### How to create generate note
 Release note content is generated based on merge commit messages.

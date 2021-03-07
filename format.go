@@ -27,7 +27,7 @@ func GetNextVersion(tag string) (string, error) {
 		return strings.Join(tags, "."), nil
 	}
 
-	// date version(e.g. 20180525.1)
+	// date version(e.g. 20180525.1 or release_20180525.1)
 	const layout = "20060102"
 	today := time.Now().Format(layout)
 
