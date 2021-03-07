@@ -6,7 +6,7 @@ import (
 )
 
 // Version is GDP's version.
-const Version string = "v0.2.4"
+const Version string = "v0.2.5"
 
 // Usage is GDP's usage.
 const Usage string = "usage: gdp deploy|publish [options]"
