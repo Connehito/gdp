@@ -4,9 +4,10 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"github.com/mitchellh/colorstring"
 	"io"
 	"os"
+
+	"github.com/mitchellh/colorstring"
 )
 
 // CLI has stdout/stderr's writer and Gdp's interface.
@@ -172,16 +173,16 @@ func printError(w io.Writer, message string, args ...interface{}) {
 func validate(cli *CLI, subCommand string, tag string) bool {
 	if subCommand == CommandDeploy {
 		if !cli.gdp.IsMasterOrMainBranch() {
-			printError(cli.errStream, fmt.Sprintf("Branch is not master or main."))
+			printError(cli.errStream, "Branch is not master or main.")
 			return false
 		}
 		if cli.gdp.IsExistTagInLocal(tag) {
-			printError(cli.errStream, fmt.Sprintf("Tag is already exist in local."))
+			printError(cli.errStream, "Tag is already exist in local.")
 			return false
 		}
 	} else {
 		if !cli.gdp.IsExistTagInRemote(tag) {
-			printError(cli.errStream, fmt.Sprintf("Tag is not exist in remote."))
+			printError(cli.errStream, "Tag is not exist in remote.")
 			return false
 		}
 	}
@@ -209,10 +210,10 @@ func yesOrNo(cli *CLI) bool {
 		fmt.Fprintln(cli.outStream, "OK. Take time.")
 		return true
 	} else if s == []byte("N")[0] || s == []byte("n")[0] {
-		printError(cli.errStream, fmt.Sprintf("Good choice."))
+		printError(cli.errStream, "Good choice.")
 		return false
 	}
 
-	printError(cli.errStream, fmt.Sprintf("Please enter y or n."))
+	printError(cli.errStream, "Please enter y or n.")
 	return false
 }
