@@ -4,10 +4,7 @@ VERSION=$(shell git describe --tags --abbrev=0)
 OS=darwin
 ARCH=amd64
 
-all: setup mod test build
-setup:
-	go get golang.org/x/lint/golint
-	go get golang.org/x/tools/cmd/goimports
+all: mod test build
 mod:
 	go mod download
 test:
