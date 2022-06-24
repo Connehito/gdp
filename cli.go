@@ -72,7 +72,7 @@ func (cli *CLI) Run(args []string) int {
 	}
 
 	if version {
-		fmt.Fprintln(cli.outStream, fmt.Sprintf("gdp version %s", Version))
+		fmt.Fprintf(cli.outStream, "gdp version %s\n", Version)
 		return ExitSuccess
 	}
 
