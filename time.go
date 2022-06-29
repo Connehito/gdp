@@ -1,16 +1,26 @@
 package main
 
-import "time"
+import (
+	"time"
+)
 
 var fakeTime time.Time
+var now = time.Now
 
+//Now returns the current time
 func Now() time.Time {
 	if !fakeTime.IsZero() {
 		return fakeTime
 	}
-	return time.Now()
+	return now()
 }
 
+//Set fake time
 func Set(t time.Time) {
 	fakeTime = t
+}
+
+//Reset fake time
+func Reset() {
+	fakeTime = time.Time{}
 }
