@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 
 	"github.com/mitchellh/colorstring"
 )
@@ -190,13 +191,10 @@ func validate(cli *CLI, subCommand string, tag string) bool {
 	return true
 }
 
-func IsSafetyHour() bool {
-	t := Now()
-	if t.Hour() >= SafetyHourStart && t.Hour() < SafetyHourEnd {
-		return true
-	}
+var now = time.Now
 
-	return false
+func IsSafetyHour() bool {
+	return now().Hour() >= SafetyHourStart && now().Hour() < SafetyHourEnd
 }
 
 func yesOrNo(cli *CLI) bool {
