@@ -6,7 +6,7 @@ gdp is a CLI tool for pushing the tag associated with deployment and publishing 
 [![Go Report Card](https://goreportcard.com/badge/github.com/Connehito/gdp)](https://goreportcard.com/report/github.com/Connehito/gdp)
 [![GoDoc](https://godoc.org/github.com/Connehito/gdp?status.svg)](https://godoc.org/github.com/Connehito/gdp)
 [![Latest Version](http://img.shields.io/github/release/Connehito/gdp.svg?style=flat-square)](https://github.com/Connehito/gdp/releases/latest)
-[![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/Connehito/gdp/master/LICENSE)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/Connehito/gdp/main/LICENSE)
 
 ## Requirements
 - [git command](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
